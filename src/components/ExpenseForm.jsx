@@ -52,7 +52,7 @@ const ExpenseForm = () => {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 w-full max-w-md mx-auto">
+    <div className="bg-black rounded-lg shadow-md p-6 w-full max-w-md mx-auto">
       <h2 className="text-2xl font-semibold text-expense-dark mb-6 text-center">
         Add New Expense
       </h2>
@@ -60,7 +60,7 @@ const ExpenseForm = () => {
         <div>
           <label
             htmlFor="description"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-white mb-1"
           >
             Description
           </label>
@@ -70,14 +70,14 @@ const ExpenseForm = () => {
             placeholder="What did you spend on?"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-expense-light focus:border-transparent transition-all"
+            className="w-full px-4 py-2 rounded-md border border-white focus:outline-none focus:ring-2 focus:ring-expense-light focus:border-transparent transition-all"
             disabled={isSubmitting}
           />
         </div>
         <div>
           <label
             htmlFor="amount"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-white mb-1"
           >
             Amount
           </label>
@@ -87,14 +87,14 @@ const ExpenseForm = () => {
             placeholder="0.00"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-expense-light focus:border-transparent transition-all"
+            className="w-full px-4 py-2 text-white rounded-md border border-white focus:outline-none focus:ring-2 focus:ring-expense-light focus:border-transparent transition-all"
             disabled={isSubmitting}
           />
         </div>
         <div>
           <label
             htmlFor="category"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-white mb-1"
           >
             Category
           </label>
@@ -103,7 +103,7 @@ const ExpenseForm = () => {
             placeholder="What did you spend on?"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-expense-light focus:border-transparent transition-all"
+            className="w-full px-4 py-2 rounded-md border border-white text-white focus:outline-none focus:ring-2 focus:ring-expense-light focus:border-transparent transition-all"
             disabled={isSubmitting}
           >
             {categoryOptions.map((option) => (
@@ -117,7 +117,7 @@ const ExpenseForm = () => {
         <div>
           <label
             htmlFor="date"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-white mb-1"
           >
             Date
           </label>
@@ -126,7 +126,7 @@ const ExpenseForm = () => {
             id="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-expense-light focus:border-transparent transition-all"
+            className="w-full text-white px-4 py-2 rounded-md border border-white focus:outline-none focus:ring-2 focus:ring-expense-light focus:border-transparent transition-all"
             disabled={isSubmitting}
           />
         </div>

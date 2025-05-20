@@ -55,7 +55,7 @@ const ExpenseList = () => {
       </div>
 
       {sortedExpenses.length === 0 ? (
-        <div className="bg-white rounded-lg shadow-sm p-8 text-center text-gray-500">
+        <div className="bg-black rounded-lg shadow-sm p-8 text-center text-white">
           <p className="mb-2">No expenses found</p>
           {categoryFilter !== "all" && (
             <p>Try changing the category filter or add new expenses.</p>
@@ -69,46 +69,46 @@ const ExpenseList = () => {
                 <tr>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
                   >
                     Date
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
                   >
                     Description
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
                   >
                     Category
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
                   >
                     Amount
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-black uppercase tracking-wider"
                   >
                     Action
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
+              <tbody className="bg-black divide-y divide-gray-200">
                 {sortedExpenses.map((expense) => (
                   <tr
                     key={expense.id}
-                    className="hover:bg-gray-50 transition-colors"
+                    className="hover:bg-gray-700 transition-colors"
                   >
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                       {formatDate(expense.date)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                       {expense.description}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -121,7 +121,7 @@ const ExpenseList = () => {
                           expense.category.slice(1)}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium ">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">
                       {formatCurrency(expense.amount)}
                     </td>
 

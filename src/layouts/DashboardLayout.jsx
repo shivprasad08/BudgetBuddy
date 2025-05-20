@@ -27,14 +27,14 @@ const DashboardLayout = ({ children }) => {
           },
         }}
       />
-      <header className="bg-white shadow-sm">
+      <header className="bg-black shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-center md:justify-between items-center">
             <h1 className="text-3xl font-bold text-expense">
-              Budjet Wow Tracker
+              BudgetBuddy
             </h1>
-            <p className="hidden md:block text-gray-500">
-              Track your expenses with ease
+            <p className="hidden md:block text-purple-300">
+              Track every rupee effortlessly.
             </p>
           </div>
         </div>
@@ -47,7 +47,7 @@ const DashboardLayout = ({ children }) => {
       <footer className="bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <p className="text-center text-gray-500 text-sm">
-            Budget Wow Tracker &copy; {new Date().getFullYear()}
+            BudgetBuddy &copy; {new Date().getFullYear()}
           </p>
         </div>
       </footer>

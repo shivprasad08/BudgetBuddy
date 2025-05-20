@@ -26,13 +26,13 @@ const ExpenseSummary = () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg">
+      <div className="bg-black rounded-lg shadow-md p-6 hover:shadow-lg">
         <div className="flex items-center space-x-4">
           <div className="bg-expense-light p-3 rounded-full">
             <Wallet size={24} className="text-expense" />
           </div>
           <div>
-            <h3 className="text-sm font-medium text-gray-500">
+            <h3 className="text-sm font-medium text-white">
               Total Expenses
             </h3>
             <p className="text-2xl font-bold text-expense-dark">
@@ -41,13 +41,13 @@ const ExpenseSummary = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg">
+      <div className="bg-black rounded-lg shadow-md p-6 hover:shadow-lg">
         <div className="flex items-center space-x-4">
           <div className="bg-red-100 p-3 rounded-full">
             <TrendingUp size={24} className="text-red-500" />
           </div>
           <div>
-            <h3 className="text-sm font-medium text-gray-500">
+            <h3 className="text-sm font-medium text-white">
               Highest Category
             </h3>
             <p className="text-2xl font-bold text-expense-dark">
@@ -65,13 +65,13 @@ const ExpenseSummary = () => {
           </div>
         </div>
       </div>
-      <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg">
+      <div className="bg-black rounded-lg shadow-md p-6 hover:shadow-lg">
         <div className="flex items-center space-x-4">
           <div className="bg-green-100 p-3 rounded-full">
             <TrendingDown size={24} className="text-green-500" />
           </div>
           <div>
-            <h3 className="text-sm font-medium text-gray-500">Total Entries</h3>
+            <h3 className="text-sm font-medium text-white">Total Entries</h3>
             <p className="text-2xl font-bold text-expense-dark">
               {expenses.length}
             </p>
