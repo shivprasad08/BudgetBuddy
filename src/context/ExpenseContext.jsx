@@ -56,6 +56,7 @@ export const ExpenseProvider = ({ children }) => {
       const newExpense = {
         ...expense,
         id: crypto.randomUUID(),
+        createdAt: new Date().toISOString(),
       };
       dispatch({ type: "ADD_EXPENSE", payload: newExpense });
     },
@@ -65,6 +66,52 @@ export const ExpenseProvider = ({ children }) => {
     updateExpense: (expense) => {
       dispatch({ type: "UPDATE_EXPENSE", payload: expense });
     },
+    calculateTotals: () => {
+      const totalIncome = state.expenses
+        .filter(e => e.type === 'income')
+        .reduce((sum, e) => sum + e.amount, 0);
+      const totalExpense = state.expenses
+        .filter(e => e.type === 'expense')
+        .reduce((sum, e) => sum + e.amount, 0);
+      return {
+        totalIncome,
+        totalExpense,
+        balance: totalIncome - totalExpense
+      };
+    },
+    getExpensesByCategory: () => {
+      const categoryMap = {};
+      state.expenses
+        .filter(e => e.type === 'expense')
+        .forEach(expense => {
+          if (!categoryMap[expense.category]) {
+            categoryMap[expense.category] = 0;
+          }
+          categoryMap[expense.category] += expense.amount;
+        });
+      return Object.entries(categoryMap).map(([category, total]) => ({
+        category,
+        total
+      }));
+    },
+    getWeeklyData: () => {
+      const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+      return days.map(day => {
+        const dayExpenses = state.expenses.filter(e => {
+          const expenseDay = new Date(e.date).toLocaleDateString('en-US', { weekday: 'short' });
+          return expenseDay === day && e.type === 'expense';
+        });
+        const dayIncome = state.expenses.filter(e => {
+          const incomeDay = new Date(e.date).toLocaleDateString('en-US', { weekday: 'short' });
+          return incomeDay === day && e.type === 'income';
+        });
+        return {
+          day,
+          expense: dayExpenses.reduce((sum, e) => sum + e.amount, 0),
+          income: dayIncome.reduce((sum, e) => sum + e.amount, 0)
+        };
+      });
+    }
   };
 
   return (
@@ -79,3 +126,5 @@ export const useExpenses = () => {
   }
   return context;
 };
+
+export const useExpenseContext = useExpenses;
