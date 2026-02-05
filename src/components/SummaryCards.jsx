@@ -1,6 +1,6 @@
 import React from "react";
-import { TrendingUp, TrendingDown } from "lucide-react";
 import { useExpenses } from "../context/ExpenseContext";
+import { TrendingUp, TrendingDown, MoreHorizontal } from "lucide-react";
 
 const SummaryCards = () => {
   const { calculateTotals } = useExpenses();
@@ -16,114 +16,69 @@ const SummaryCards = () => {
     {
       id: 1,
       title: "Balance",
-      amount: balance,
-      percentage: totalIncome > 0 ? Math.min(Math.abs((balance / totalIncome) * 100), 100) : 72,
-      bgColor: "from-blue-600 to-blue-400",
-      borderColor: "border-blue-500",
+      value: balance.toFixed(2),
+      lastMonth: (balance * 0.95).toFixed(1),
       trend: balance >= 0 ? "up" : "down",
-      trendValue: balance >= 0 ? `+${Math.round((balance / 100) * 10)}%` : `-${Math.round((Math.abs(balance) / 100) * 10)}%`,
+      trendValue: "0.2%",
+      bgColor: "#0D0D0D",
     },
     {
       id: 2,
       title: "Expense",
-      amount: totalExpense,
-      percentage: totalIncome > 0 ? Math.min((totalExpense / totalIncome) * 100, 100) : 0,
-      bgColor: "from-red-600 to-red-400",
-      borderColor: "border-red-500",
-      isNegative: true,
+      value: totalExpense.toFixed(2),
+      lastMonth: (totalExpense * 1.1).toFixed(1),
       trend: "down",
-      trendValue: `-${Math.round((totalExpense / totalIncome) * 10) || 0}%`,
+      trendValue: "1.2%",
+      bgColor: "#2F54EB",
     },
     {
       id: 3,
       title: "Income",
-      amount: totalIncome,
-      percentage: 100,
-      bgColor: "from-green-600 to-green-400",
-      borderColor: "border-green-500",
+      value: totalIncome.toFixed(2),
+      lastMonth: (totalIncome * 0.9).toFixed(1),
       trend: "up",
-      trendValue: `+${Math.round((totalIncome / 100) * 10) || 0}%`,
+      trendValue: "3.1%",
+      bgColor: "#138D75",
     },
   ];
-
-  const formatCurrency = (amount) => {
-    return Math.abs(amount).toFixed(2) + "$";
-  };
-
-  const handleCardClick = (id) => {
-    console.log("Card clicked:", id);
-  };
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {cards.map((card) => (
         <div
           key={card.id}
-          onClick={() => handleCardClick(card.id)}
-          className={`bg-gradient-to-br ${card.bgColor} rounded-2xl p-6 text-white border-2 ${card.borderColor} backdrop-blur-sm shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 cursor-pointer group`}
+          className="rounded-2xl p-6 text-white shadow-xl transition-all duration-300 hover:scale-[1.02]"
+          style={{ backgroundColor: card.bgColor }}
         >
-          <div className="flex items-start justify-between mb-6">
-            <div>
-              <p className="text-sm font-medium opacity-80">{card.title}</p>
-              <h3 className="text-3xl font-bold mt-2">
-                {card.amount < 0 ? "-" : ""}
-                {formatCurrency(card.amount)}
-              </h3>
-              <div className="flex items-center gap-1 mt-2">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-8">
+            <h3 className="text-lg font-semibold">{card.title}</h3>
+            <button className="hover:bg-white/10 rounded-full p-1.5 transition-colors">
+              <MoreHorizontal size={20} />
+            </button>
+          </div>
+
+          {/* Amount and Trend */}
+          <div className="mb-6">
+            <div className="flex items-baseline gap-3">
+              <h2 className="text-4xl font-bold">${card.value}</h2>
+              <div style={{
+                backgroundColor: card.trend === "up" ? "rgba(16, 185, 129, 0.2)" : "rgba(239, 68, 68, 0.2)",
+                color: card.trend === "up" ? "#a7f3d0" : "#fecaca",
+              }} className="flex items-center gap-1 px-2.5 py-1 rounded-md text-sm font-medium">
                 {card.trend === "up" ? (
-                  <TrendingUp size={16} className="text-green-300" />
+                  <TrendingUp size={14} />
                 ) : (
-                  <TrendingDown size={16} className="text-red-300" />
+                  <TrendingDown size={14} />
                 )}
-                <span className={`text-xs font-semibold ${card.trend === "up" ? "text-green-300" : "text-red-300"}`}>
-                  {card.trendValue}
-                </span>
+                <span>{card.trend === "up" ? "+" : "-"}{card.trendValue}</span>
               </div>
             </div>
           </div>
 
-          {/* Circular Progress Chart */}
-          <div className="flex items-center justify-center mt-4">
-            <svg
-              className="w-32 h-32 transform -rotate-90"
-              viewBox="0 0 120 120"
-              fill="none"
-            >
-              {/* Background circle */}
-              <circle
-                cx="60"
-                cy="60"
-                r="50"
-                stroke="rgba(255, 255, 255, 0.2)"
-                strokeWidth="8"
-                fill="none"
-              />
-              {/* Progress circle */}
-              <circle
-                cx="60"
-                cy="60"
-                r="50"
-                stroke="rgba(255, 255, 255, 0.9)"
-                strokeWidth="8"
-                fill="none"
-                strokeDasharray={`${(Math.abs(card.percentage) / 100) * 2 * Math.PI * 50} ${2 * Math.PI * 50}`}
-                strokeLinecap="round"
-                className="transition-all duration-700"
-              />
-              {/* Percentage text */}
-              <text
-                x="60"
-                y="60"
-                textAnchor="middle"
-                dy="0.3em"
-                className="text-2xl font-bold"
-                fill="rgba(255, 255, 255, 0.95)"
-                fontSize="24"
-                fontWeight="bold"
-              >
-                {Math.abs(Math.round(card.percentage))}%
-              </text>
-            </svg>
+          {/* Last Month Comparison */}
+          <div className="text-sm opacity-90">
+            Vs last month: <span className="font-semibold">${card.lastMonth}</span>
           </div>
         </div>
       ))}

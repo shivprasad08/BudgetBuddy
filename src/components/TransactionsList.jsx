@@ -39,9 +39,13 @@ const TransactionsList = () => {
     toast.success(`Showing ${expenses.length} transactions`);
   };
 
-  const handleDeleteTransaction = (id) => {
-    deleteExpense(id);
-    toast.success("Transaction deleted");
+  const handleDeleteTransaction = async (id) => {
+    const result = await deleteExpense(id);
+    if (result?.success) {
+      toast.success("Transaction deleted");
+    } else {
+      toast.error(result?.error || "Failed to delete transaction");
+    }
   };
 
   const handleTransactionClick = (txn) => {

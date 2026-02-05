@@ -23,7 +23,7 @@ const ExpenseForm = ({ onClose, expense = null }) => {
     { value: "Other", label: "Other" },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
@@ -45,11 +45,19 @@ const ExpenseForm = ({ onClose, expense = null }) => {
       };
 
       if (expense) {
-        updateExpense({ ...transactionData, id: expense.id });
-        toast.success("Transaction updated successfully");
+        const result = await updateExpense({ ...transactionData, id: expense.id });
+        if (result?.success) {
+          toast.success("Transaction updated successfully");
+        } else {
+          throw new Error(result?.error || "Failed to update transaction");
+        }
       } else {
-        addExpense(transactionData);
-        toast.success("Transaction added successfully");
+        const result = await addExpense(transactionData);
+        if (result?.success) {
+          toast.success("Transaction added successfully");
+        } else {
+          throw new Error(result?.error || "Failed to add transaction");
+        }
       }
 
       onClose();

@@ -5,7 +5,7 @@ import Header from "../components/Header";
 
 const DashboardLayout = ({ children, onAddTransaction }) => {
   return (
-    <div className="min-h-screen bg-[#1a1625] flex flex-col">
+    <div className="min-h-screen bg-white flex flex-col">
       <Toaster
         position="top-right"
         toastOptions={{

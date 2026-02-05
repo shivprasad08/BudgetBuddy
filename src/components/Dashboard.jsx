@@ -1,7 +1,6 @@
 import React from "react";
 import SummaryCards from "./SummaryCards";
 import CategoriesSectionSimple from "./CategoriesSectionSimple";
-import StatisticsSectionSimple from "./StatisticsSectionSimple";
 import BalanceVisualizationSimple from "./BalanceVisualizationSimple";
 import TransactionsList from "./TransactionsList";
 import RemindersSection from "./RemindersSection";
@@ -20,9 +19,6 @@ const Dashboard = ({ showExpenseForm, setShowExpenseForm }) => {
         <div className="lg:col-span-2 space-y-6">
           {/* Categories Section */}
           <CategoriesSectionSimple />
-
-          {/* Statistics Section */}
-          <StatisticsSectionSimple />
 
           {/* Balance Visualization */}
           <BalanceVisualizationSimple />

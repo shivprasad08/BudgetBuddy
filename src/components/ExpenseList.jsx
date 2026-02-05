@@ -30,9 +30,13 @@ const ExpenseList = () => {
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 
-  const handleDelete = (id) => {
-    deleteExpense(id);
-    toast.success("Expense deleted successfully");
+  const handleDelete = async (id) => {
+    const result = await deleteExpense(id);
+    if (result?.success) {
+      toast.success("Expense deleted successfully");
+    } else {
+      toast.error(result?.error || "Failed to delete expense");
+    }
   };
 
   return (
